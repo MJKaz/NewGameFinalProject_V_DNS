@@ -55,12 +55,12 @@
     <UnityVersion>2021.3.45f2</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Projectile.cs" />
     <Compile Include="Assets\Script\Enemy.cs" />
+    <Compile Include="Assets\Script\Tower.cs" />
     <Compile Include="Assets\Script\Gate.cs" />
     <Compile Include="Assets\Script\EnemySpawner.cs" />
     <Compile Include="Assets\Script\WaveManager.cs" />
-    <Compile Include="Assets\Script\Tower.cs" />
-    <Compile Include="Assets\Script\Projectile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
