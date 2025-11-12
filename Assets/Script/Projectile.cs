@@ -3,8 +3,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed = 10f;
-    public int damage = 20;
     private Enemy target;
+    public BuildableObject turrets;
 
     public void SetTarget(Enemy enemy)
     {
@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     void HitTarget()
     {
-        target.TakeDamage(damage);
+        target.TakeDamage(turrets.damage);
         Destroy(gameObject);
     }
 }

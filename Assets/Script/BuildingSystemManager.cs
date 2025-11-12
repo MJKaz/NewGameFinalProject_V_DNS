@@ -257,8 +257,7 @@ public class BuildingSystemManager : MonoBehaviour
         currentPreviewObject.transform.rotation
         );
 
-        BuildableObject buildable = builtObject.GetComponent<BuildableObject>();
-        buildable.isPlaced = true;  //  mark as placed
+        
 
         // Assign buildable layer
         builtObject.layer = LayerMask.NameToLayer("Buildable");
@@ -268,13 +267,6 @@ public class BuildingSystemManager : MonoBehaviour
         Debug.Log($"Built: {currentBuildableData.name}");
         tentBuilded = true;
 
-        // Create Safe Zone (if tent)
-        if (safeZonePrefab != null && currentBuildableData.objectName == "Tent")
-        {
-            Vector3 zonePos = currentPreviewObject.transform.position;
-            activeSafeZone = Instantiate(safeZonePrefab, zonePos, Quaternion.identity);
-            Debug.Log("Safe Zone Created at Tent Location");
-        }
 
         // Clear any highlight effect
         ClearHighlight();
@@ -450,24 +442,7 @@ public class BuildingSystemManager : MonoBehaviour
         canHighlight = true;
     }
 
-    public List<BuildableObject> GetPlacedBuildables()
-    {
-        
-        List<BuildableObject> list = new List<BuildableObject>();
-
-        #if UNITY_2023_1_OR_NEWER
-            foreach (var b in FindObjectsByType<BuildableObject>(FindObjectsSortMode.None))
-        #else
-            foreach (var b in FindObjectsOfType<BuildableObject>(false))
-        #endif
-            {
-                if (b.isPlaced)
-                    list.Add(b);
-            }
-
-
-        return list;
-    }
+   
 
 
 }

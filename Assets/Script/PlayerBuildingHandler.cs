@@ -6,7 +6,7 @@ public class PlayerBuildingHandler : MonoBehaviour
     [Header("References")]
     public BuildingSystemManager buildingSystem;
     public Camera playerCamera;
-    public BuildableObject tentBuildable; // assign your Tent BuildableObject asset
+    
 
     [Header("Buildable Selection")]
     public BuildableDatabase buildableDatabase;
@@ -23,10 +23,7 @@ public class PlayerBuildingHandler : MonoBehaviour
                 HandleBuildSelection();
         }
 
-        if(buildingSystem.tentBuilded == true)
-        {
-            tentBuildable = null;
-        }
+        
 
     }
 
@@ -46,10 +43,10 @@ public class PlayerBuildingHandler : MonoBehaviour
     {
         
         
-        if(buildingSystem.tentBuilded == false)
-        {
-            buildingSystem.StartBuildMode(tentBuildable);
-        }
+        
+        
+        buildingSystem.StartBuildMode(buildableDatabase.buildables[0]);
+        
  
         isInBuildMode = true;
         Cursor.lockState = CursorLockMode.None;
@@ -70,7 +67,7 @@ public class PlayerBuildingHandler : MonoBehaviour
 
     private void HandleBuildSelection()
     {
-        if (buildableDatabase == null || buildableDatabase.buildables.Count == 0) return;
+        if (buildableDatabase == null || buildableDatabase.buildables.Length == 0) return;
 
         // Scroll through buildables
         float scroll = Mouse.current.scroll.ReadValue().y;
@@ -80,7 +77,7 @@ public class PlayerBuildingHandler : MonoBehaviour
         CycleBuildable(-1);
 
         // Number keys 1–9 shortcut
-        for (int i = 0; i < Mathf.Min(9, buildableDatabase.buildables.Count); i++)
+        for (int i = 0; i < Mathf.Min(9, buildableDatabase.buildables.Length); i++)
         {
             if (Keyboard.current[(Key)(Key.Digit1 + i)].wasPressedThisFrame)
             {
@@ -92,14 +89,14 @@ public class PlayerBuildingHandler : MonoBehaviour
     private void CycleBuildable(int direction)
     {
         currentIndex += direction;
-        if (currentIndex >= buildableDatabase.buildables.Count) currentIndex = 0;
-        if (currentIndex < 0) currentIndex = buildableDatabase.buildables.Count - 1;
+        if (currentIndex >= buildableDatabase.buildables.Length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = buildableDatabase.buildables.Length - 1;
         UpdateCurrentBuildable();
     }
 
     private void SetBuildableIndex(int index)
     {
-        currentIndex = Mathf.Clamp(index, 0, buildableDatabase.buildables.Count - 1);
+        currentIndex = Mathf.Clamp(index, 0, buildableDatabase.buildables.Length - 1);
         UpdateCurrentBuildable();
     }
 

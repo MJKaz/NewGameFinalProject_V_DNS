@@ -7,18 +7,11 @@ public class BuildableObject : ScriptableObject
     public GameObject previewPrefab;
     public GameObject finalPrefab;
     public Vector3 placementOffset;
+    public Tower tower;
 
-    [Header("Buildable Info")]
-    public string buildID;     // unique ID for saving/loading
-    public string resourceName;
-    public GameObject prefab;  // reference to self prefab
-    public Transform transform;
-
-    [Header("Runtime State")]
-    public bool isPreview = false;
-    public bool isPlaced = false; // true after confirm placement
-
-
+    [Header("Turrets Stats")]
+    public int damage;
+    public int lv;
 
     [Header("Build Requirements")]
     public ItemCost[] buildCost;
@@ -26,6 +19,12 @@ public class BuildableObject : ScriptableObject
     [Header("Refund Settings")]
     [Range(0f, 1f)] public float refundRate = 0.5f; // 50% refund
 
-
+    public void LevelUp()
+    {
+        damage += 1;
+        lv += 1;
+        tower.range += 5;
+        tower.fireRate += 1;
+    }
 
 }
